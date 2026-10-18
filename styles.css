@@ -1,0 +1,350 @@
+/* ==========================================================================
+   霞鹜文楷 (LXGW WenKai) 专属字体样式表 v2.1.0
+   仅在 gemini.google.com、chatgpt.com、chat.openai.com 注入
+   ========================================================================== */
+
+/* 1. 兜底 PostScript 名称映射（仅声明 400 normal 字重，允许浏览器对 700 触发合成粗体；若安装了原版 Bold 则优先匹配 Bold） */
+@font-face {
+  font-family: "LXGW-WenKai-PS-Fallback";
+  font-weight: 400;
+  font-style: normal;
+  src:
+    local("LXGWWenKaiGBScreen-Regular"),
+    local("LXGWWenKaiGBScreen"),
+    local("LXGWWenKaiScreen-Regular"),
+    local("LXGWWenKaiScreen"),
+    local("LXGWWenKaiGB-Regular"),
+    local("LXGWWenKai-Regular");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "LXGW-WenKai-Mono-PS-Fallback";
+  font-weight: 400;
+  font-style: normal;
+  src:
+    local("LXGWWenKaiMonoGBScreen-Regular"),
+    local("LXGWWenKaiMonoGBScreen"),
+    local("LXGWWenKaiMonoScreen-Regular"),
+    local("LXGWWenKaiMonoScreen"),
+    local("LXGWWenKaiMonoGB-Regular"),
+    local("LXGWWenKaiMono-Regular");
+  font-display: swap;
+}
+
+:root {
+  /* 直接使用系统注册的中英文家族名作为主栈（避免 @font-face local() 锁定字重导致 Chrome 忽略粗体合成） */
+  --lxgw-font-sans:
+    "LXGW WenKai GB Screen",
+    "霞鹜文楷 GB 屏幕阅读版",
+    "霞鹜文楷GB屏幕阅读版",
+    "LXGW WenKai Screen",
+    "霞鹜文楷 屏幕阅读版",
+    "霞鹜文楷屏幕阅读版",
+    "LXGW WenKai GB Screen R",
+    "霞鹜文楷 GB 屏幕阅读版 R",
+    "LXGW WenKai Screen R",
+    "霞鹜文楷 屏幕阅读版 R",
+    "LXGW WenKai GB",
+    "霞鹜文楷 GB",
+    "LXGW WenKai",
+    "霞鹜文楷",
+    "LXGW-WenKai-PS-Fallback",
+    -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+
+  --lxgw-font-mono:
+    "LXGW WenKai Mono GB Screen",
+    "霞鹜文楷等宽 GB 屏幕阅读版",
+    "霞鹜文楷等宽GB屏幕阅读版",
+    "LXGW WenKai Mono Screen",
+    "霞鹜文楷等宽 屏幕阅读版",
+    "霞鹜文楷等宽屏幕阅读版",
+    "LXGW WenKai Mono GB",
+    "霞鹜文楷等宽 GB",
+    "LXGW WenKai Mono",
+    "霞鹜文楷等宽",
+    "LXGW-WenKai-Mono-PS-Fallback",
+    "LXGW WenKai GB Screen",
+    "霞鹜文楷 GB 屏幕阅读版",
+    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+/* 2. 覆盖 ChatGPT 与 Gemini 的全局 CSS 字体变量，并强制开启粗体与斜体合成 (font-synthesis) */
+html:not([data-lxgw-disabled="true"]),
+html:not([data-lxgw-disabled="true"]) body {
+  --font-sans: var(--lxgw-font-sans) !important;
+  --font-family-sans: var(--lxgw-font-sans) !important;
+  --bard-font-family: var(--lxgw-font-sans) !important;
+  --gemini-font-family: var(--lxgw-font-sans) !important;
+  --mat-app-body-font-family: var(--lxgw-font-sans) !important;
+  --mat-sys-body-large-font: var(--lxgw-font-sans) !important;
+  --mat-sys-body-medium-font: var(--lxgw-font-sans) !important;
+  --mat-sys-body-small-font: var(--lxgw-font-sans) !important;
+  --mat-sys-title-large-font: var(--lxgw-font-sans) !important;
+  --mat-sys-title-medium-font: var(--lxgw-font-sans) !important;
+  --mat-sys-title-small-font: var(--lxgw-font-sans) !important;
+  --mat-sys-label-large-font: var(--lxgw-font-sans) !important;
+  --mat-sys-label-medium-font: var(--lxgw-font-sans) !important;
+  --mat-sys-label-small-font: var(--lxgw-font-sans) !important;
+  --mat-sys-headline-large-font: var(--lxgw-font-sans) !important;
+  --mat-sys-headline-medium-font: var(--lxgw-font-sans) !important;
+  --mat-sys-headline-small-font: var(--lxgw-font-sans) !important;
+  --mdc-typography-font-family: var(--lxgw-font-sans) !important;
+  --mdc-typography-body1-font-family: var(--lxgw-font-sans) !important;
+  --mdc-typography-body2-font-family: var(--lxgw-font-sans) !important;
+  --mdc-typography-subtitle1-font-family: var(--lxgw-font-sans) !important;
+  --mdc-typography-subtitle2-font-family: var(--lxgw-font-sans) !important;
+  --mdc-typography-headline6-font-family: var(--lxgw-font-sans) !important;
+  --mdc-typography-button-font-family: var(--lxgw-font-sans) !important;
+  font-family: var(--lxgw-font-sans) !important;
+  font-synthesis: weight style !important;
+  font-synthesis-weight: auto !important;
+  font-synthesis-style: auto !important;
+}
+
+/* 3. 精准定位 ChatGPT 与 Gemini 的文本排版元素（包含 strong/b/em/i/mark/del/u 等行内样式标签），严密排除图标与数学公式 */
+html:not([data-lxgw-disabled="true"]) :is(
+  p,
+  article,
+  blockquote,
+  li,
+  dt,
+  dd,
+  td,
+  th,
+  label,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  strong,
+  b,
+  em,
+  i:not([class*="icon"]):not([class*="symbol"]):not([class*="fa-"]):not(.material-icons):not(.google-symbols),
+  u,
+  del,
+  s,
+  mark,
+  textarea,
+  input,
+  #prompt-textarea,
+  #prompt-textarea *,
+  .ProseMirror,
+  .ProseMirror p,
+  rich-textarea,
+  .ql-editor,
+  .ql-editor p,
+  .markdown,
+  .prose,
+  .model-response-text,
+  .user-query,
+  .user-query-text,
+  .query-text,
+  .response-content,
+  message-content,
+  [data-message-author-role],
+  [data-message-author-role] p,
+  [data-message-author-role] li,
+  [data-message-author-role] div:not([class*="icon"]):not([class*="symbol"]):not(.katex):not([class*="katex"]):not([class*="cm-"]):not([class*="code"]),
+  .conversation-title,
+  .gds-body-s,
+  .gds-body-m,
+  .gds-body-l,
+  .gds-title-s,
+  .gds-title-m,
+  .gds-title-l,
+  .gds-headline-s,
+  .gds-headline-m,
+  .gds-headline-l,
+  .gds-label-s,
+  .gds-label-m,
+  .gds-label-l,
+  .mdc-button__label,
+  .mat-mdc-menu-item-text,
+  .mat-mdc-tooltip,
+  nav a
+):not(
+  mat-icon,
+  mat-icon *,
+  .mat-icon,
+  .mat-icon *,
+  font-icon,
+  font-icon *,
+  .google-symbols,
+  .google-symbols *,
+  .material-icons,
+  .material-icons *,
+  [class*="material-symbols"],
+  [class*="material-symbols"] *,
+  .mat-ligature-font,
+  .mat-ligature-font *,
+  [data-mat-icon-type],
+  [data-mat-icon-type] *,
+  [data-mat-icon-name],
+  [data-mat-icon-name] *,
+  [fonticon],
+  [fonticon] *,
+  [class*="icon"],
+  [class*="icon"] *,
+  [class*="symbol"],
+  [class*="symbol"] *,
+  .notranslate,
+  [translate="no"],
+  [aria-hidden="true"],
+  svg,
+  svg *,
+  .katex,
+  .katex *,
+  mjx-container,
+  mjx-container *,
+  pre,
+  pre *,
+  code,
+  code *
+) {
+  font-family: var(--lxgw-font-sans) !important;
+  font-synthesis: weight style !important;
+  font-synthesis-weight: auto !important;
+  font-synthesis-style: auto !important;
+}
+
+/* 4. 解决单字重屏幕阅读版 (LXGWWenKaiGBScreen.ttf) 加粗不生效/不明显问题：
+      将 Gemini/ChatGPT 默认的 500/600 字重统一提升至 700 (触发 DirectWrite 合成粗体)，并叠加清晰矢量描边增强 */
+html:not([data-lxgw-disabled="true"]) :is(
+  strong,
+  strong *,
+  b,
+  b *,
+  th,
+  th *,
+  thead td,
+  h1,
+  h1 *,
+  h2,
+  h2 *,
+  h3,
+  h3 *,
+  h4,
+  h4 *,
+  h5,
+  h5 *,
+  h6,
+  h6 *,
+  [class*="font-bold"],
+  [class*="font-semibold"],
+  .gds-headline-s,
+  .gds-headline-m,
+  .gds-headline-l,
+  .gds-title-m,
+  .gds-title-l
+):not(
+  mat-icon,
+  mat-icon *,
+  .mat-icon,
+  .google-symbols,
+  [class*="icon"],
+  [class*="symbol"],
+  .katex,
+  .katex *,
+  mjx-container,
+  mjx-container *
+) {
+  font-weight: 700 !important;
+  font-synthesis: weight style !important;
+  font-synthesis-weight: auto !important;
+}
+
+/* 标准加粗增强模式（默认开启，可通过弹窗切换为 strong 或 native） */
+html:not([data-lxgw-disabled="true"]):not([data-lxgw-bold="native"]):not([data-lxgw-bold="strong"]) :is(
+  strong,
+  strong *:not(code):not(pre),
+  b,
+  b *:not(code):not(pre),
+  th,
+  th *:not(code):not(pre),
+  thead td,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  [class*="font-bold"],
+  [class*="font-semibold"]
+):not(
+  mat-icon,
+  .mat-icon,
+  .google-symbols,
+  [class*="icon"],
+  [class*="symbol"],
+  .katex,
+  .katex *
+) {
+  -webkit-text-stroke: 0.35px currentColor;
+  paint-order: stroke fill;
+}
+
+/* 强力加粗增强模式（适合高分屏或偏好强烈粗体对比的用户） */
+html:not([data-lxgw-disabled="true"])[data-lxgw-bold="strong"] :is(
+  strong,
+  strong *:not(code):not(pre),
+  b,
+  b *:not(code):not(pre),
+  th,
+  th *:not(code):not(pre),
+  thead td,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  [class*="font-bold"],
+  [class*="font-semibold"]
+):not(
+  mat-icon,
+  .mat-icon,
+  .google-symbols,
+  [class*="icon"],
+  [class*="symbol"],
+  .katex,
+  .katex *
+) {
+  -webkit-text-stroke: 0.55px currentColor;
+  text-shadow: 0.15px 0 0 currentColor, -0.15px 0 0 currentColor;
+  paint-order: stroke fill;
+}
+
+/* 5. 确保斜体 (em / i) 在单字重字体下正常触发浏览器合成斜体 */
+html:not([data-lxgw-disabled="true"]) :is(
+  em,
+  em *,
+  i:not([class*="icon"]):not([class*="symbol"]):not([class*="fa-"]):not(.material-icons):not(.google-symbols):not([data-mat-icon-type])
+) {
+  font-style: italic !important;
+  font-synthesis: weight style !important;
+  font-synthesis-style: auto !important;
+}
+
+/* 6. 代码块等宽字体（默认启用，且支持代码块内的粗体/语法高亮加粗与斜体） */
+html:not([data-lxgw-disabled="true"]):not([data-lxgw-code="false"]) :is(
+  pre,
+  code,
+  pre span:not(.google-symbols):not(.mat-icon):not([class*="icon"]),
+  code span:not(.google-symbols):not(.mat-icon):not([class*="icon"]),
+  .cm-content,
+  .cm-line
+) {
+  font-family: var(--lxgw-font-mono) !important;
+  font-synthesis: weight style !important;
+  font-synthesis-weight: auto !important;
+  font-synthesis-style: auto !important;
+}
+
+/* 处于 strong / b / th / h1-h6 内部的行内代码 `code` 同步加粗 */
+html:not([data-lxgw-disabled="true"]) :is(strong, b, th, h1, h2, h3, h4) code {
+  font-weight: 700 !important;
+  -webkit-text-stroke: 0.3px currentColor;
+}

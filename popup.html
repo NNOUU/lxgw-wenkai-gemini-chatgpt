@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>霞鹜文楷设置</title>
+  <style>
+    :root {
+      color-scheme: light dark;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      width: 340px;
+      padding: 16px;
+      font-family: "LXGW WenKai GB Screen", "霞鹜文楷 GB 屏幕阅读版", "LXGW WenKai Screen", "霞鹜文楷 屏幕阅读版", "LXGW WenKai", "霞鹜文楷", -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+      background: #f8fafc;
+      color: #0f172a;
+      font-size: 13.5px;
+      line-height: 1.5;
+    }
+    @media (prefers-color-scheme: dark) {
+      body {
+        background: #0f172a;
+        color: #f1f5f9;
+      }
+      .card {
+        background: #1e293b !important;
+        border-color: #334155 !important;
+      }
+      .subtitle, .note {
+        color: #94a3b8 !important;
+      }
+      .badge {
+        background: #1e3a8a !important;
+        color: #93c5fd !important;
+      }
+      select {
+        background: #0f172a !important;
+        color: #f1f5f9 !important;
+        border-color: #475569 !important;
+      }
+      .status-ok {
+        background: rgba(16, 185, 129, 0.15) !important;
+        color: #6ee7b7 !important;
+        border-color: rgba(16, 185, 129, 0.3) !important;
+      }
+      .status-warn {
+        background: rgba(245, 158, 11, 0.15) !important;
+        color: #fcd34d !important;
+        border-color: rgba(245, 158, 11, 0.3) !important;
+      }
+    }
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+    .title {
+      font-size: 15px;
+      font-weight: 700;
+    }
+    .badge {
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: #dbeafe;
+      color: #1d4ed8;
+      font-weight: 600;
+    }
+    .subtitle {
+      font-size: 12px;
+      color: #475569;
+      margin-bottom: 10px;
+    }
+    .status-box {
+      font-size: 12px;
+      padding: 8px 10px;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      border: 1px solid transparent;
+      line-height: 1.4;
+    }
+    .status-ok {
+      background: #ecfdf5;
+      color: #065f46;
+      border-color: #a7f3d0;
+    }
+    .status-warn {
+      background: #fffbeb;
+      color: #92400e;
+      border-color: #fde68a;
+    }
+    .card {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 8px 12px;
+      margin-bottom: 10px;
+    }
+    .row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 6px 0;
+    }
+    .row + .row {
+      border-top: 1px solid rgba(148, 163, 184, 0.2);
+    }
+    .label-group {
+      display: flex;
+      flex-direction: column;
+      padding-right: 10px;
+    }
+    .label-title {
+      font-weight: 600;
+      font-size: 13px;
+    }
+    .label-desc {
+      font-size: 11px;
+      color: #64748b;
+    }
+    input[type="checkbox"] {
+      width: 17px;
+      height: 17px;
+      accent-color: #2563eb;
+      cursor: pointer;
+    }
+    select {
+      font-size: 12px;
+      padding: 4px 8px;
+      border-radius: 6px;
+      border: 1px solid #cbd5e1;
+      background: #f8fafc;
+      color: #0f172a;
+      cursor: pointer;
+    }
+    .note {
+      font-size: 11px;
+      color: #64748b;
+      line-height: 1.45;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <span class="title">霞鹜文楷字体插件</span>
+    <span class="badge">v2.1 专用版</span>
+  </div>
+  <p class="subtitle">仅对 Gemini 与 ChatGPT 网页端生效，支持单字重加粗与斜体增强。</p>
+
+  <div id="fontStatus" class="status-box status-warn">
+    正在检测系统本地「霞鹜文楷」字体...
+  </div>
+
+  <div class="card">
+    <div class="row">
+      <div class="label-group">
+        <span class="label-title">Google Gemini 网页端</span>
+        <span class="label-desc">gemini.google.com</span>
+      </div>
+      <input type="checkbox" id="enableGemini" checked />
+    </div>
+    <div class="row">
+      <div class="label-group">
+        <span class="label-title">OpenAI ChatGPT 网页端</span>
+        <span class="label-desc">chatgpt.com / chat.openai.com</span>
+      </div>
+      <input type="checkbox" id="enableChatGPT" checked />
+    </div>
+    <div class="row">
+      <div class="label-group">
+        <span class="label-title">代码块使用霞鹜文楷等宽</span>
+        <span class="label-desc">pre / code 调用 LXGW WenKai Mono</span>
+      </div>
+      <input type="checkbox" id="enableCodeMono" checked />
+    </div>
+    <div class="row">
+      <div class="label-group">
+        <span class="label-title">粗体 / 标题加粗强度</span>
+        <span class="label-desc">针对单字重屏幕阅读版优化粗体辨识度</span>
+      </div>
+      <select id="boldMode">
+        <option value="standard">标准增强 (推荐)</option>
+        <option value="strong">强力加粗 (醒目)</option>
+        <option value="native">原生合成 (轻微)</option>
+      </select>
+    </div>
+  </div>
+
+  <p class="note">
+    说明：「屏幕阅读版」本身为单字重（无独立 Bold 文件），开启<strong>标准增强</strong>或<strong>强力加粗</strong>可让标题、表头和加粗文字层次分明。
+  </p>
+
+  <script src="popup.js"></script>
+</body>
+</html>
